@@ -13,7 +13,7 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String translate(String key, Language language) throws Exception {
+	public String getText(String key, Language language) throws Exception {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
@@ -24,22 +24,22 @@ public class LanguageManipulation {
 		try {
 			file.load(new FileInputStream("resources/" + fileName));
 		} catch (IOException e) {
-			throw new CannotFindPropertyFileException();
+			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 
 		// Find the requested string
-		String translation = file.getProperty(key);
+		String text = file.getProperty(key);
 
 
-		if(translation == null && language == Language.English) { 
+		if(text == null && language == Language.English) { 
 			throw new NonExistingKey();
 		}
 
-		if(translation == null && language != Language.English) { 
-			translation = "This Key does not exist or it has not been yet translated";
+		if(text == null && language != Language.English) { 
+			text = "This Key does not exist or it has not been yet translated";
 		}
 
-		return translation;
+		return text;
 	}
 
 
