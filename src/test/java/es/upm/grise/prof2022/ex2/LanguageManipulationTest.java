@@ -8,10 +8,13 @@ import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
   static LanguageManipulation langMan;
+  static CollaboratorClass collab;
+  
 
   @BeforeAll
   public static void setUp(){
-    langMan = new LanguageManipulation();
+    collab = new CollaboratorClass();
+    langMan = new LanguageManipulation(collab);
   }
 
   @Test
