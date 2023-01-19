@@ -6,21 +6,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LanguageManipulationTest{
 	private static 	Access Ac;
 	
 	@Test
-	public void FileInput_Test() throws CannotFindPropertyFileOrWrongFileException {
+	public void FileInput_Test() throws Exception {
 		
 		LanguageManipulation lm = new LanguageManipulation();
-		
-		assertThrows(CannotFindPropertyFileOrWrongFileException.class,()->lm.getText("123", Language.English));
+		Ac = mock(Access.class);
+		when(Ac.getString("Italian-strings.properties", "123")).thenThrow(CannotFindPropertyFileOrWrongFileException.class);
+		assertThrows(CannotFindPropertyFileOrWrongFileException.class,()->lm.getText("greeting", Language.Italian));
 	}
 	
 	@Test
-	public void NullText_Test() throws NonExistingKeyException{
+	public void NullText_Test() throws Exception{
 		LanguageManipulation lm = new LanguageManipulation();
+		Ac = mock(Access.class);
+		when(Ac.getString("","")).thenThrow(NonExistingKeyException.class);
 		assertThrows(NonExistingKeyException.class,()->lm.getText(null, null));
 	}
 	
