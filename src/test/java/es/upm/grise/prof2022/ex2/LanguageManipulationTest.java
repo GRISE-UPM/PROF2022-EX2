@@ -19,11 +19,11 @@ public class LanguageManipulationTest {
   }
 
   @Test
-  public void catchTest(){
+  public void catchTest() throws CannotFindPropertyFileOrWrongFileException{
     Language lang = Language.Italian;
     String key = "key";
 
-    when(collab.loadFile(lang + "-strings.properties").thenThrows(CannotFindPropertyFileOrWrongFileException.class);
+    doThrow(new CannotFindPropertyFileOrWrongFileException()).when(collab).loadFile(lang + "-strings.properties");
     assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> {langMan.getText(key, lang);});
   }
 
@@ -32,7 +32,6 @@ public class LanguageManipulationTest {
     Language lang = Language.English;
     String key = "null";
 
-    when(collab.)
     assertThrows(NonExistingKeyException.class, () -> {langMan.getText(key, lang);});
   }
 
