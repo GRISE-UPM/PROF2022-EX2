@@ -6,25 +6,33 @@ import java.util.Properties;
 public class NewFile {
 
 	private Properties propertyFile;
+	private String key;
 
-	public NewFile(Language language) throws Exception {
+
+	public String getText(Language language, String key) throws Exception {
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		propertyFile = new Properties();
-
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
+		propertyFile.load(new FileInputStream("resources/" + fileName));
+		return propertyFile.getProperty(key);
 	}
 	
 	
 	public Properties getPropertyFile() {
 		return propertyFile;
 	}
+	
+	public void setPropertyFile(Properties propertyFile) {
+		this.propertyFile = propertyFile;
+	}
+	
+	public String getPropertyKey() {
+		return propertyFile.getProperty(key);
+	}
+	
+	public void setPropertyKey(String key) {
+		this.key = key;
+	}
+	
 	
 	
 

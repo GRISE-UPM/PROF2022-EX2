@@ -4,6 +4,12 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class LanguageManipulation {
+	
+	private NewFile nFile;
+	
+	public LanguageManipulation(NewFile newFile) {
+		this.nFile = newFile;
+	}
 
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
@@ -13,11 +19,16 @@ public class LanguageManipulation {
 	//
 	// See the smokeTest
 	public String getText(String key, Language language) throws Exception {
-
-		NewFile newFile = new NewFile(language);
 		
 		// Find the requested string
-		String text = newFile.getPropertyFile().getProperty(key);
+		String text = null;
+		// Load the property fileException
+		// If the file does not exist, we raise an exception
+		try {
+			text =nFile.getText(language, key);
+		} catch (Exception e) {
+			throw new CannotFindPropertyFileOrWrongFileException();
+		}
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
