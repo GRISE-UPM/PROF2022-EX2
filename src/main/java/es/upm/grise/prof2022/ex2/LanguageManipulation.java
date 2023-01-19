@@ -5,6 +5,8 @@ import java.util.Properties;
 
 public class LanguageManipulation {
 
+	public AccesoPropertyFile propertyFA = new AccesoPropertyFile();
+
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
 	// This method return the string associated with a key, e.g.,
@@ -15,14 +17,14 @@ public class LanguageManipulation {
 	public String getText(String key, Language language) throws Exception {
 
 		// Property filename
-		String fileName = language.toString() + "-strings.properties";
+		String fileName = "resources/" + language.toString() + "-strings.properties";
 		Properties propertyFile = new Properties();
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
 		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
+			propertyFile = propertyFA.load(fileName);		
+			} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 

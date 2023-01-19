@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
 
-
+	//try-cath
 	@Test
 	public void prueba_catch() {
 		LanguageManipulation lengman;
@@ -27,7 +27,7 @@ public class LanguageManipulationTest {
 		
 	}
 	
-	//non-existing key Italian
+	//non-existing key Spanish
 	@Test
 	public void prueba_if_2() throws Exception {
 		String key = "ASDFASDFASDF";
