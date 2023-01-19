@@ -8,21 +8,29 @@ import java.util.Properties;
 
 public class LanguageManipulationProperties {
 	
+	String fileName;
 	Properties propertyFile;
+	String key;
 	
-	LanguageManipulationProperties(){
-		propertyFile = new Properties();
+	LanguageManipulationProperties(String key, Language language){
+		this.fileName = language.toString() + "-strings.properties";
+		this.propertyFile = new Properties();
+		this.key=key;
+	}
+	
+	public String generarResource() {
+		String resource = "resources/" + fileName;
+		return resource;
 	}
 
-	public void load(FileInputStream fileInputStream) throws IOException {
-		// TODO Auto-generated method stub
-		propertyFile.load(fileInputStream);
-		
+	public void load() throws IOException {
+		propertyFile.load(new FileInputStream(this.generarResource()));
 	}
 
-	public String getProperty(String key) {
-		// TODO Auto-generated method stub
+	public String getProperty() {
 		return propertyFile.getProperty(key);
 	}
+	
+	
 
 }
