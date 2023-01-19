@@ -4,15 +4,8 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class LanguageFile {
-	
-	Language language;
-	
-	public LanguageFile(Language language) {
-		super();
-		this.language = language;
-	}
 
-	public Properties getPropertyFile() throws CannotFindPropertyFileOrWrongFileException{
+	private Properties getPropertyFile(Language language) throws CannotFindPropertyFileOrWrongFileException {
 		String fileName = language.toString() + "-strings.properties";
 		Properties propertyFile = new Properties();
 
@@ -25,6 +18,11 @@ public class LanguageFile {
 		}
 
 		return propertyFile;
+	}
+	
+	public String getText(String key, Language language) throws CannotFindPropertyFileOrWrongFileException {
+		Properties propertyFile = getPropertyFile(language);
+		return propertyFile.getProperty(key);
 	}
 
 }

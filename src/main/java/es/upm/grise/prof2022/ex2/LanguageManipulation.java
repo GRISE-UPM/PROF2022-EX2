@@ -15,7 +15,7 @@ public class LanguageManipulation {
 	public String getText(String key, Language language, LanguageFile languageFile) throws Exception {
 
 		// Find the requested string
-		String text = languageFile.getPropertyFile().getProperty(key);
+		String text = languageFile.getText(key, language);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
