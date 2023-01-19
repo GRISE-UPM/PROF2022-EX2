@@ -15,6 +15,7 @@ public class LanguageManipulation {
 	//
 	// See the smokeTest
     
+    
     public String getText(String key, Language language) throws Exception {
         return propAccess.getText(key, language);
     }
