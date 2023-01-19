@@ -9,10 +9,11 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
+	
+	LanguageManipulationHelper lmh = new LanguageManipulationHelper();
+	
 	public String getText(String key, Language language) throws Exception {
 
-		
-		LanguageManipulationHelper lmh = new LanguageManipulationHelper();
 		String text = lmh.getText(key, language);
 
 		// Non-existing key: case 1
