@@ -28,7 +28,7 @@ public class LanguageManipulationTest {
 	//El camino que recorre es P1: 15,18,19 - 24 - 30 - 33(a) - 33(b) - 34 -43
 	@Test
 	public void getTextTest_firstIf(){
-		assertThrows(NonExistingKeyException.class, () -> lm.getText(null, Language.English));
+		assertThrows(NonExistingKeyException.class, () -> lm.getText("", Language.English));
 	}
 	
 	//Test para poner a prueba el segundo if
@@ -36,7 +36,7 @@ public class LanguageManipulationTest {
 	@Test
 	public void getTextTest_secondIf() throws Exception{
 		assertEquals("This Key does not exist or it has not been yet translated",
-				lm.getText(null, Language.Spanish));	
+				lm.getText("", Language.Spanish));	
 	}
 
 }
