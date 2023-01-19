@@ -16,18 +16,10 @@ public class LanguageManipulation {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
-
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
-
+		PropertyColaborator pc = new PropertyColaborator();
+		
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
+		String text = pc.getText(key, fileName);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
