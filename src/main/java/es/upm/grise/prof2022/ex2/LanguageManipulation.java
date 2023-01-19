@@ -11,13 +11,9 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String getText(String key, Language language, AccesoFicheros af) throws Exception {
-
-		// Property filename
-		Properties propertyFile = af.getDiccionario(language);
-
+	public String getText(String key, Language language, SuperDiccionario af) throws Exception {
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
+		String text = af.traducir(language, key);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 

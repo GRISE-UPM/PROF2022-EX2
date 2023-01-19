@@ -3,9 +3,9 @@ package es.upm.grise.prof2022.ex2;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class AccesoFicheros {
+public class SuperDiccionario {
 
-	public Properties getDiccionario(Language language) throws Exception {
+	public String traducir(Language language, String key) throws Exception {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
@@ -18,7 +18,7 @@ public class AccesoFicheros {
 		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
-		return propertyFile;
+		return propertyFile.getProperty(key);
 
 	}
 
