@@ -15,7 +15,7 @@ public class LanguageManipulation {
 	public String getText(String key, Language language) throws Exception {
 
 		LanguageManipulationCollab lmc = new LanguageManipulationCollab();
-		text = lmc.getText(key,language);
+		String text = lmc.getText(key,language);
 
 		return text;
 	}
