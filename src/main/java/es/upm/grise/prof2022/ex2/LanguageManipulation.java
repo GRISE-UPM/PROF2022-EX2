@@ -2,6 +2,12 @@ package es.upm.grise.prof2022.ex2;
 
 public class LanguageManipulation {
 
+	private FileFactoryInterface factory;
+
+	public LanguageManipulation(FileFactoryInterface f) {
+		this.factory = f;
+	}
+
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
 	// This method return the string associated with a key, e.g.,
@@ -11,10 +17,8 @@ public class LanguageManipulation {
 	// See the smokeTest
 	public String getText(String key, Language language) throws Exception {
 
-		FileFactoryInterface fileF = new FileFactory();
-
 		// Find the requested string
-		String text = fileF.openFile(key,language);
+		String text = this.factory.openFile(key,language);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 

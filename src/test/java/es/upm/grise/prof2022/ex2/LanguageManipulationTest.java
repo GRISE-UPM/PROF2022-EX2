@@ -1,6 +1,8 @@
 package es.upm.grise.prof2022.ex2;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +16,10 @@ public class LanguageManipulationTest {
 	 */
 	@Test
 	public void camino1Test() {
-		LanguageManipulation lm = new LanguageManipulation();
+		FileFactoryInterface m = mock(FileFactory.class);
+		LanguageManipulation lm = new LanguageManipulation(m);
 		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> {
+			when(m.openFile("key", Language.Italian)).thenThrow(CannotFindPropertyFileOrWrongFileException.class);
 			lm.getText("key", Language.Italian);
 		});
 	}
@@ -25,10 +29,14 @@ public class LanguageManipulationTest {
 	 * Ejercitamos el primer if, lanzamos excepcion
 	 */
 	@Test
-	public void camino2Test() {
-		LanguageManipulation lm = new LanguageManipulation();
+	public void camino2Test() throws CannotFindPropertyFileOrWrongFileException  {
+		FileFactoryInterface m = mock(FileFactory.class);
+		LanguageManipulation lm = new LanguageManipulation(m);
+
+		
 		try {
-			lm.getText("greeting", Language.English);
+			when(m.openFile("key", Language.English)).thenReturn(null);
+			//when(m.openFile("key", Language.English)).thenThrow(NonExistingKeyException.class);
 		} catch (Exception e) {
 			fail();
 			e.printStackTrace();
@@ -45,11 +53,13 @@ public class LanguageManipulationTest {
 	 */
 	@Test
 	public void camino6Test() {
-		LanguageManipulation lm = new LanguageManipulation();
+		FileFactoryInterface m = mock(FileFactory.class);
+		LanguageManipulation lm = new LanguageManipulation(m);
 		String text = "";
 		String res = "This Key does not exist or it has not been yet translated";
 		try {
-			text = lm.getText("key", Language.Spanish);
+			when(m.openFile("greeting", Language.Spanish)).thenReturn(null);
+			text = lm.getText("greeting", Language.Spanish);
 		} catch (Exception e) {
 			fail();
 			e.printStackTrace();
