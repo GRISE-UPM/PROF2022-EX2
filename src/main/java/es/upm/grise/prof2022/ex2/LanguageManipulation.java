@@ -5,6 +5,8 @@ import java.util.Properties;
 
 public class LanguageManipulation {
 
+	Collaborator collaborator;
+
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
 	// This method return the string associated with a key, e.g.,
@@ -16,18 +18,10 @@ public class LanguageManipulation {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
-
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
+		if (collaborator == null) collaborator = new Collaborator(fileName);
 
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
+		String text = collaborator.getProperty(key);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
@@ -42,5 +36,8 @@ public class LanguageManipulation {
 		return text;
 	}
 
+	public void setCollaborator(Collaborator collaborator) {
+		this.collaborator = collaborator;
+	}
 
 }
