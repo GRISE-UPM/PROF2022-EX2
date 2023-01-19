@@ -10,16 +10,19 @@ public class LanguageManipulationTest {
 	@Test
 	public void path1() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText("greeting", Language.Italian));
+		AccesoFicheros af = new AccesoFicheros();
+		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText("greeting", Language.Italian,af));
 	}
 	@Test
 	public void path2() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertEquals("How are you?", lm.getText("greeting", Language.English));
+		AccesoFicheros af = new AccesoFicheros();
+		assertEquals("How are you?", lm.getText("greeting", Language.English,af));
 	}
 	@Test
 	public void path3() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("tude mal?", Language.Spanish));
+		AccesoFicheros af = new AccesoFicheros();
+		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("tude mal?", Language.Spanish,af));
 	}
 }
