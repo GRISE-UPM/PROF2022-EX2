@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
 	
-	LanguageManipulation lm = new LanguageManipulation();
+	FilePropertiesManipulation fileProperties = new FilePropertiesManipulation();
+	LanguageManipulation lm = new LanguageManipulation(fileProperties);
 	
 	// Test para el camino C1 : 15 - 24 - 26
 	@Test

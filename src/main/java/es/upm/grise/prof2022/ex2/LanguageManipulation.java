@@ -7,12 +7,18 @@ public class LanguageManipulation {
 	// This method return the string associated with a key, e.g.,
 	// translate("greeting", English) == "How are you?"
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
-	//
+	
+	private FilePropertiesManipulation fileManipulation;
+	
+	public LanguageManipulation(FilePropertiesManipulation m) {
+		this.fileManipulation = m;
+	}
+
 	// See the smokeTest
 	public String getText(String key, Language language) throws Exception {
 
 		// Find the requested string
-		String text = FilePropertiesManipulation.getInstance().getTextFromProperty(language.toString(), key);
+		String text = this.fileManipulation.getTextFromProperty(language.toString(), key);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 

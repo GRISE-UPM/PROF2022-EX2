@@ -5,20 +5,8 @@ import java.util.Properties;
 
 public class FilePropertiesManipulation {
 	
-	private static FilePropertiesManipulation instance;
-	
-	// Singleton access method
-	public static FilePropertiesManipulation getInstance() {	
-		if (instance != null)
-			return instance;
-		else {
-			instance = new FilePropertiesManipulation();
-			return instance;
-		}
-	}
-	
 	// Constructor
-	private FilePropertiesManipulation() {
+	public FilePropertiesManipulation() {
 		
 	}
 	
