@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
-
 	
 	/**
 	 * Prueba de camino básico 1: // Load the property fileException
 	 */
 	@Test
 	public void catchException_test() {
-		LanguageManipulation lm = new LanguageManipulation();
+		Collaborator collaborator = new Collaborator();
+		LanguageManipulation lm = new LanguageManipulation(collaborator);
 		
 		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText("greeting", Language.Italian));
 	}
@@ -24,7 +24,9 @@ public class LanguageManipulationTest {
 	 */
 	@Test
 	public void NonExistingKeyException_test() {
-		LanguageManipulation lm = new LanguageManipulation();
+		Collaborator collaborator = new Collaborator();
+
+		LanguageManipulation lm = new LanguageManipulation(collaborator);
 		
 		
 		assertThrows(NonExistingKeyException.class, () -> lm.getText("", Language.English));
@@ -37,7 +39,9 @@ public class LanguageManipulationTest {
 	 */
 	@Test
 	public void NonExistingKey_test() throws Exception {
-		LanguageManipulation lm = new LanguageManipulation();
+		Collaborator collaborator = new Collaborator();
+
+		LanguageManipulation lm = new LanguageManipulation(collaborator);
 		String result = "This Key does not exist or it has not been yet translated";
 		
 		

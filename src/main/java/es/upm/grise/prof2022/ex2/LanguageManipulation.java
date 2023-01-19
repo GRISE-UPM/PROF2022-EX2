@@ -1,10 +1,15 @@
 package es.upm.grise.prof2022.ex2;
 
 import java.io.FileInputStream;
-import java.util.Properties;
+//import java.util.Properties;
 
 public class LanguageManipulation {
-
+	protected Collaborator collaborator;
+	
+	public LanguageManipulation (Collaborator collab) {
+		this.collaborator = collab;
+	}
+	
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
 	// This method return the string associated with a key, e.g.,
@@ -16,18 +21,21 @@ public class LanguageManipulation {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
+		
+		//Properties propertyFile = new Properties();
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
 		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
+			//propertyFile.load(new FileInputStream("resources/" + fileName));
+			collaborator.loadProperty(new FileInputStream("resources/" + fileName));
 		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
+		//String text = propertyFile.getProperty(key);
+		String text = collaborator.getProperty(key);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
