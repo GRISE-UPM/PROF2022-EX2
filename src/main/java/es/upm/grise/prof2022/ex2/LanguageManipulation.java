@@ -1,7 +1,6 @@
 package es.upm.grise.prof2022.ex2;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class LanguageManipulation {
@@ -17,18 +16,18 @@ public class LanguageManipulation {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		Properties file = new Properties();
+		Properties propertyFile = new Properties();
 
-		// Load the property file
+		// Load the property fileException
 		// If the file does not exist, we raise an exception
 		try {
-			file.load(new FileInputStream("resources/" + fileName));
-		} catch (IOException e) {
+			propertyFile.load(new FileInputStream("resources/" + fileName));
+		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 
 		// Find the requested string
-		String text = file.getProperty(key);
+		String text = propertyFile.getProperty(key);
 
 
 		if(text == null && language == Language.English) { 
