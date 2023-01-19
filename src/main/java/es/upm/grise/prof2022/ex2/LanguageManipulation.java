@@ -4,6 +4,12 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class LanguageManipulation {
+	
+	PropertyColaborator pcm;
+	
+	public LanguageManipulation(PropertyColaborator pc){
+		this.pcm = pc;
+	}
 
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
@@ -16,10 +22,9 @@ public class LanguageManipulation {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
-		PropertyColaborator pc = new PropertyColaborator();
 		
 		// Find the requested string
-		String text = pc.getText(key, fileName);
+		String text = pcm.getText(key, fileName);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
