@@ -1,5 +1,7 @@
 package es.upm.grise.prof2022.ex2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -38,21 +40,23 @@ public class LanguageManipulationTest {
 	public void catch_C1() throws Exception {
 		language = Language.Italian;
 		when(refactor.cargaryobtener(key, language)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
-		when(lm.getText(key, language, refactor)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
+		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText(key, language, refactor));
 	}
 
 	// Camino 2
 	@Test
 	public void if_C2() throws Exception {
 		language = Language.English;
-		when(lm.getText(key, language)).thenThrow(new NonExistingKeyException());
+		when(refactor.cargaryobtener(key, language)).thenReturn(null);
+		assertThrows(NonExistingKeyException.class, () -> lm.getText(key, language, refactor));
 	}
 
 	// Camino 6
 	@Test
 	public void if_C6_2() throws Exception {
 		language = Language.Spanish;
-		when(lm.getText(key, language)).thenReturn("This Key does not exist or it has not been yet translated");
+		when(refactor.cargaryobtener(key, language)).thenReturn(null);
+		assertEquals("This Key does not exist or it has not been yet translated", lm.getText(key, language, refactor));
 	}
 
 }
