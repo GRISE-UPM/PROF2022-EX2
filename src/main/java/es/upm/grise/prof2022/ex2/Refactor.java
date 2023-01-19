@@ -11,14 +11,19 @@ public class Refactor {
     }
 
     // Carga el fichero de propiedades
-    public void cargarFichero(Language language) throws Exception {
-        String fileName = language.toString() + "-strings.properties";
-        propertyFile.load(new FileInputStream("resources/" + fileName));
-    }
+    public String cargaryobtener(String key, Language language) throws Exception {
+      	
+		// Load the property fileException
+		// If the file does not exist, we raise an exception
+		try {
+            String fileName = language.toString() + "-strings.properties";
+            propertyFile.load(new FileInputStream("resources/" + fileName));
+		} catch (Exception e) {
+			throw new CannotFindPropertyFileOrWrongFileException();
+		}
 
-    // Obtiene la propiedad del fichero de propiedades
-    public String obtenerPropiedad(String key) throws Exception {
-        return propertyFile.getProperty(key);
+		// Find the requested string
+		return propertyFile.getProperty(key);
     }
     
 }

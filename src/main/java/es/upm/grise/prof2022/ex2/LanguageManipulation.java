@@ -9,21 +9,9 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String getText(String key, Language language) throws Exception {
+	public String getText(String key, Language language, Refactor refactor) throws Exception {
 
-		// Property filename
-		Refactor refactor = new Refactor();
-	
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			refactor.cargarFichero(language);
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
-
-		// Find the requested string
-		String text = refactor.obtenerPropiedad(key);
+		String text = refactor.cargaryobtener(key, language);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 

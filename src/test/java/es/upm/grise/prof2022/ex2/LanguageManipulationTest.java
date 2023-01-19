@@ -23,11 +23,13 @@ public class LanguageManipulationTest {
 
 	static LanguageManipulation lm;
 	static Language language;
+	static Refactor refactor;
 	static String key;
 
 	@BeforeAll
 	public static void setUp() {
-		lm = Mockito.mock(LanguageManipulation.class);
+		lm = new LanguageManipulation();
+		refactor = Mockito.mock(Refactor.class);
 		key = "key";
 	}
 
@@ -35,7 +37,8 @@ public class LanguageManipulationTest {
 	@Test
 	public void catch_C1() throws Exception {
 		language = Language.Italian;
-		when(lm.getText(key, language)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
+		when(refactor.cargaryobtener(key, language)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
+		when(lm.getText(key, language, refactor)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
 	}
 
 	// Camino 2
