@@ -33,7 +33,7 @@ public class LanguageManipulation {
 		if(text == null && language == Language.English) { 
 			throw new NonExistingKeyException();
 		}
-
+		
 		// Non-existing key: case 2
 		if(text == null && language != Language.English) { 
 			text = "This Key does not exist or it has not been yet translated";
