@@ -12,23 +12,29 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
+	
+	CollaboratorAccessFiles collaborator = new CollaboratorAccessFiles();
+	
 	public String getText(String key, Language language) throws Exception {
 
 		// Property filename
-		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
+		//Se comentan porque ya no se necesitan
+		//String fileName = language.toString() + "-strings.properties";
+		//Properties propertyFile = new Properties();
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
 		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
+			//propertyFile.load(new FileInputStream("resources/" + fileName));
+			collaborator.loadFile(language);
 		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
-
+		//String text = propertyFile.getProperty(key);
+		String text = collaborator.getProperty(key);
+		
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
 			throw new NonExistingKeyException();
