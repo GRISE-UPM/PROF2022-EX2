@@ -11,8 +11,12 @@ public class PropertiesCol {
 		propertyFile = new Properties();
 	}
 	
-	public void load(FileInputStream strm) throws Exception {
-		propertyFile.load(strm);
+	public void load(FileInputStream strm, String filename) throws Exception {
+		try {
+			propertyFile.load(new FileInputStream("resources/" + fileName));
+		} catch (Exception e) {
+			throw new CannotFindPropertyFileOrWrongFileException();
+		}
 	}
 	
 	public String getProperty(String key) {

@@ -4,6 +4,12 @@ import java.io.FileInputStream;
 //import java.util.Properties;
 
 public class LanguageManipulation {
+	
+	PropertiesCol propertyFile;
+	
+	public LanguageManipulation(PropertiesCol propertyFile){
+		this.propertyFile = propertyFile;	
+	}
 
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
@@ -12,18 +18,14 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String getText(String key, Language language, PropertiesCol propertyFile) throws Exception {
+	public String getText(String key, Language language) throws Exception {
 
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
+		propertyFile.load(filename);
 
 		// Find the requested string
 		String text = propertyFile.getProperty(key);

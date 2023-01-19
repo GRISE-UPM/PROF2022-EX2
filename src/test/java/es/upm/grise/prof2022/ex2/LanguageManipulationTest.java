@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -24,8 +25,8 @@ public class LanguageManipulationTest {
 	public static void init () {
 		
 		// Initialization
-		lm = new LanguageManipulation();
 		pc = mock(PropertiesCol.class);
+		lm = new LanguageManipulation(pc);
 	}
 	
 	/*
@@ -33,17 +34,17 @@ public class LanguageManipulationTest {
 	 * 	Llamada - 15 - 26 - Salida
 	 */
 	@Test
-	public void catchTest() {
+	public void catchTest() throws Exception{
 		
 		// Initialization
 		ky = "foo";
 		lg = Language.Italian;
 		
-		when(pc.load(any(FileInputStream.class))).thenThrow(new Exception());
+		doThrow(new CannotFindPropertyFileOrWrongFileException()).when(pc).load(any(String.class));
 		
 		// Assertion
 		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> {
-			lm.getText(ky, lg, pc);
+			lm.getText(ky, lg);
 		});
 	}
 	
@@ -60,7 +61,7 @@ public class LanguageManipulationTest {
 		
 		// Assertion
 		assertThrows(NonExistingKeyException.class, () -> {
-			lm.getText(ky, lg, pc);
+			lm.getText(ky, lg);
 		});
 	}
 
@@ -74,10 +75,12 @@ public class LanguageManipulationTest {
 		// Initialization
 		ky = "foo";
 		lg = Language.Spanish;
+		
+		when(pc.getProperty(ky)).thenReturn(null);
 
 		// Assertion
 		try {
-			assertEquals(lm.getText(ky, lg, pc), "This Key does not exist or it has not been yet translated");
+			assertEquals(lm.getText(ky, lg), "This Key does not exist or it has not been yet translated");
 		} catch (Exception e) {
 			fail("No debería haber lanzado Exception");
 		}
