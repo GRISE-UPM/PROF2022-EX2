@@ -23,6 +23,7 @@ public class LanguageManipulationTest {
 	public void emptyWordInEnglishTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
 		LanguageFile languageFile = mock(LanguageFile.class);
+		when(languageFile.getText("", Language.English)).thenReturn(null);
 		assertThrows(NonExistingKeyException.class,() -> lm.getText("", Language.English, languageFile));
 	}
 	
@@ -31,6 +32,7 @@ public class LanguageManipulationTest {
 	public void emptyWordNotInEnglishTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
 		LanguageFile languageFile = mock(LanguageFile.class);
+		when(languageFile.getText("", Language.Spanish)).thenReturn(null);
 		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("", Language.Spanish, languageFile));
 	}
 
