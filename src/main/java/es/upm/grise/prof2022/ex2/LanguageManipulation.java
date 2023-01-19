@@ -32,7 +32,7 @@ public class LanguageManipulation {
 
 
 		if(text == null && language == Language.English) { 
-			throw new NonExistingKey();
+			throw new NonExistingKeyException();
 		}
 
 		if(text == null && language != Language.English) { 
