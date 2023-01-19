@@ -10,11 +10,15 @@ public class LanguageManipulation {
 	//
 	// See the smokeTest
 	
-	LanguageManipulationHelper lmh = new LanguageManipulationHelper();
+	private LanguageManipulationHelper lmh = new LanguageManipulationHelper();
+	
+	public void setLmh(LanguageManipulationHelper lmh) {
+	    this.lmh = lmh;
+	  }
 	
 	public String getText(String key, Language language) throws Exception {
 
-		String text = lmh.getText(key, language);
+		String text = this.lmh.getText(key, language);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
