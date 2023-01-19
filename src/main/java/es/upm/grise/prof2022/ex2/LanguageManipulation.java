@@ -1,10 +1,13 @@
 package es.upm.grise.prof2022.ex2;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 public class LanguageManipulation {
+	
+	PropertyFileIndirection propertyFileIndirection;
+	
+	// Injected dependency
+	LanguageManipulation(PropertyFileIndirection propertyFileIndirection) {
+		this.propertyFileIndirection = propertyFileIndirection;
+	}
 
 	// The strings are stored in property files under /resources
 	// Each file corresponds to a Language
@@ -13,34 +16,30 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String getText(String key, Language language) throws Exception {
-
-		// Property filename
-		String fileName = language.toString() + "-strings.properties";
-		Properties file = new Properties();
-
+	public String getText(String key, Language language) throws CannotFindPropertyFileOrWrongFileException, NonExistingKeyException {
+		
 		// Load the property file
 		// If the file does not exist, we raise an exception
 		try {
-			file.load(new FileInputStream("resources/" + fileName));
-		} catch (IOException e) {
+			propertyFileIndirection.loadPropertyFile(language);
+		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
+		
+		// Load the key
+		String text = propertyFileIndirection.getRequestedKey(key);
 
-		// Find the requested string
-		String text = file.getProperty(key);
-
-
+		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
 			throw new NonExistingKeyException();
 		}
 
+		// Non-existing key: case 2
 		if(text == null && language != Language.English) { 
 			text = "This Key does not exist or it has not been yet translated";
 		}
 
 		return text;
 	}
-
 
 }
