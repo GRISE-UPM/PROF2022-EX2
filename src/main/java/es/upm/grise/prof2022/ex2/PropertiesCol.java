@@ -11,7 +11,7 @@ public class PropertiesCol {
 		propertyFile = new Properties();
 	}
 	
-	public void load(FileInputStream strm, String filename) throws Exception {
+	public void load(String fileName) throws Exception {
 		try {
 			propertyFile.load(new FileInputStream("resources/" + fileName));
 		} catch (Exception e) {

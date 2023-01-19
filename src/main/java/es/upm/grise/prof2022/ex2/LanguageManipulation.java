@@ -25,7 +25,7 @@ public class LanguageManipulation {
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
-		propertyFile.load(filename);
+		propertyFile.load(fileName);
 
 		// Find the requested string
 		String text = propertyFile.getProperty(key);
