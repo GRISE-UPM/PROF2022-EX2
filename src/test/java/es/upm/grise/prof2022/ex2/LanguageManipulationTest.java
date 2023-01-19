@@ -7,12 +7,27 @@ import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
 
+//	@Test
+//	public void smokeTest() throws Exception {
+//		LanguageManipulation lm = new LanguageManipulation();
+//		assertEquals("How are you?", lm.getText("greeting", Language.English));
+//		assertEquals("¿Cómo se encuentra?", lm.getText("greeting", Language.Spanish));
+//		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText("greeting", Language.Italian));
+//	}
+
 	@Test
-	public void smokeTest() throws Exception {
+	public void path1() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertEquals("How are you?", lm.getText("greeting", Language.English));
-		assertEquals("¿Cómo se encuentra?", lm.getText("greeting", Language.Spanish));
 		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> lm.getText("greeting", Language.Italian));
 	}
-
+	@Test
+	public void path2() throws Exception {
+		LanguageManipulation lm = new LanguageManipulation();
+		assertEquals("How are you?", lm.getText("greeting", Language.English));
+	}
+	@Test
+	public void path3() throws Exception {
+		LanguageManipulation lm = new LanguageManipulation();
+		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("tude mal?", Language.Spanish));
+	}
 }
