@@ -36,8 +36,7 @@ public class LanguageManipulationTest {
 	@Test
 	public void getTextTest_secondIf() throws Exception{
 		assertEquals("This Key does not exist or it has not been yet translated",
-				lm.getText(null, Language.Spanish));
-		
+				lm.getText(null, Language.Spanish));	
 	}
 
 }
