@@ -11,6 +11,7 @@ public class CollaboratorClass {
 		} catch (Exception e) {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
+    return;
   }
 
   public String getString(String key){

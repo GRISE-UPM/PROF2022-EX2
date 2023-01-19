@@ -2,6 +2,7 @@ package es.upm.grise.prof2022.ex2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class LanguageManipulationTest {
 
   @BeforeAll
   public static void setUp(){
-    collab = new CollaboratorClass();
+    collab = mock(CollaboratorClass.class);
     langMan = new LanguageManipulation(collab);
   }
 
@@ -21,6 +22,8 @@ public class LanguageManipulationTest {
   public void catchTest(){
     Language lang = Language.Italian;
     String key = "key";
+
+    when(collab.loadFile(lang + "-strings.properties").thenThrows(CannotFindPropertyFileOrWrongFileException.class);
     assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> {langMan.getText(key, lang);});
   }
 
@@ -28,6 +31,8 @@ public class LanguageManipulationTest {
   public void firstIfTest(){
     Language lang = Language.English;
     String key = "null";
+
+    when(collab.)
     assertThrows(NonExistingKeyException.class, () -> {langMan.getText(key, lang);});
   }
 
