@@ -27,4 +27,5 @@ public class LanguageManipulationTest {
 		Assertions.assertEquals("This Key does not exist or it has not been yet translated" , testedClass.getText("noKey",Language.Spanish));
 	}
 
+
 }
