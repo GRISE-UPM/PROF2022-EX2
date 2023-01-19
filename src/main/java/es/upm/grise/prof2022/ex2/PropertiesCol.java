@@ -3,7 +3,7 @@ package es.upm.grise.prof2022.ex2;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class PropertiesCol {
+public class PropertiesCol { 
 	
 	Properties propertyFile;
 	

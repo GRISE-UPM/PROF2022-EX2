@@ -3,6 +3,11 @@ package es.upm.grise.prof2022.ex2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.io.FileInputStream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,6 +16,7 @@ public class LanguageManipulationTest {
 	
 	// Variables
 	private static LanguageManipulation lm;
+	private static PropertiesCol pc;
 	private String ky;
 	private Language lg;
 	
@@ -19,6 +25,7 @@ public class LanguageManipulationTest {
 		
 		// Initialization
 		lm = new LanguageManipulation();
+		pc = mock(PropertiesCol.class);
 	}
 	
 	/*
@@ -32,9 +39,11 @@ public class LanguageManipulationTest {
 		ky = "foo";
 		lg = Language.Italian;
 		
+		when(pc.load(any(FileInputStream.class))).thenThrow(new Exception());
+		
 		// Assertion
 		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> {
-			lm.getText(ky, lg);
+			lm.getText(ky, lg, pc);
 		});
 	}
 	
@@ -51,7 +60,7 @@ public class LanguageManipulationTest {
 		
 		// Assertion
 		assertThrows(NonExistingKeyException.class, () -> {
-			lm.getText(ky, lg);
+			lm.getText(ky, lg, pc);
 		});
 	}
 
@@ -68,7 +77,7 @@ public class LanguageManipulationTest {
 
 		// Assertion
 		try {
-			assertEquals(lm.getText(ky, lg), "This Key does not exist or it has not been yet translated");
+			assertEquals(lm.getText(ky, lg, pc), "This Key does not exist or it has not been yet translated");
 		} catch (Exception e) {
 			fail("No debería haber lanzado Exception");
 		}
