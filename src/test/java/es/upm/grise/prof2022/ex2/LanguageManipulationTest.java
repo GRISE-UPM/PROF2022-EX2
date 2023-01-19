@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class LanguageManipulationTest {
 
-public ColaboradoraPropiedades col = new ColaboradoraPropiedades(); 
 	@Test
 	public void testPath1() throws Exception { // Camino 15 -18 - 19 - 23 - 24 - 26 - NF
 		LanguageManipulation lm = new LanguageManipulation();
