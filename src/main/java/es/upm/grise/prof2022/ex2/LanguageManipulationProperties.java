@@ -11,11 +11,26 @@ public class LanguageManipulationProperties {
 	String fileName;
 	Properties propertyFile;
 	String key;
+	Language language;
 	
 	LanguageManipulationProperties(String key, Language language){
 		this.fileName = language.toString() + "-strings.properties";
 		this.propertyFile = new Properties();
 		this.key=key;
+		language = this.language;
+	}
+	
+	public String getText(String key, Language language) throws CannotFindPropertyFileOrWrongFileException {
+		this.generarResource();
+		// Load the property fileException
+		// If the file does not exist, we raise an exception
+		try {
+			this.load();
+		} catch (Exception e) {
+			throw new CannotFindPropertyFileOrWrongFileException();
+		}
+		// Find the requested string
+		return this.getProperty();
 	}
 	
 	public String generarResource() {
@@ -31,6 +46,8 @@ public class LanguageManipulationProperties {
 		return propertyFile.getProperty(key);
 	}
 	
-	
+	public Language getLanguage() {
+		return this.language;
+	}
 
 }

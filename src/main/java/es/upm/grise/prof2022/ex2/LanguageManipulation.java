@@ -19,11 +19,7 @@ public class LanguageManipulation {
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
-		try {
-			lmp.load();
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
+		lmp.getText(key, language);
 
 		// Find the requested string
 		String text = lmp.getProperty();

@@ -2,6 +2,8 @@ package es.upm.grise.prof2022.ex2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,11 @@ public class LanguageManipulationTest {
 	@Test
 	public void firstIfTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
+		LanguageManipulationProperties lmp = mock(LanguageManipulationProperties.class);
+		
+		when(lmp.getText("", Language.English)).thenThrow(NonExistingKeyException.class);
+
+		
 		assertThrows(NonExistingKeyException.class, () -> lm.getText("", Language.English));
 	}
 	
@@ -29,6 +36,10 @@ public class LanguageManipulationTest {
 	@Test
 	public void secondIfTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
+		LanguageManipulationProperties lmp = mock(LanguageManipulationProperties.class);
+		
+		when(lmp.getText("", Language.Spanish)).thenReturn("This Key does not exist or it has not been yet translated");
+		
 		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("", Language.Spanish));
 	}
 	
