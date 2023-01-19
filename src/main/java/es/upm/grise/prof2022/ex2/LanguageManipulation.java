@@ -14,7 +14,7 @@ public class LanguageManipulation {
 	//
 	// See the smokeTest
 	
-	public String getText(String key, Language language) throws CannotFindPropertyFileOrWrongFileException, NonExistingKeyException {
+	public String getText(String key, Language language, Colaborador propertyFile) throws CannotFindPropertyFileOrWrongFileException, NonExistingKeyException {
  
 		// Property filename
 		String fileName = language.toString() + "-strings.properties";
@@ -22,7 +22,7 @@ public class LanguageManipulation {
 
 		// Load the property fileException
 		// If the file does not exist, we raise an exception
-		Colaborador propertyFile = new Colaborador( fileName);
+
 		// Find the requested string
 		String text = propertyFile.getProperty(key);
 
