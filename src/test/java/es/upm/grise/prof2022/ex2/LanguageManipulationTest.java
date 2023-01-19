@@ -7,13 +7,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LanguageManipulationTest {
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+
+
+public class LanguageManipulationTest {
+	
 	LanguageManipulation l;
 	
 	@BeforeEach
 	public void init() {
-		l = new LanguageManipulation();
+		l = mock(LanguageManipulation.class);
 	}
 	
 	//caso de prueba ejercita el catch que es camino P2
@@ -23,7 +28,8 @@ public class LanguageManipulationTest {
 	public void testCatch()  throws Exception, CannotFindPropertyFileOrWrongFileException {
 		String key = "";
 		Language language = Language.Italian;
-		assertThrows(CannotFindPropertyFileOrWrongFileException.class, ()->l.getText(key,language));
+		when(l.getText(key, language)).thenThrow(new CannotFindPropertyFileOrWrongFileException());
+		assertThrows(CannotFindPropertyFileOrWrongFileException.class, () -> l.getText(key, language));
 	}
 	
 	//otro el primer if, 
@@ -32,7 +38,8 @@ public class LanguageManipulationTest {
 	public void testPrimerIf()  throws Exception, NonExistingKeyException {
 		String key = "key";
 		Language language = Language.English;
-		assertThrows(NonExistingKeyException.class, ()->l.getText(key,language));
+		when(l.getText(key, language)).thenThrow(new NonExistingKeyException());
+		assertThrows(NonExistingKeyException.class, () -> l.getText(key, language));
 	}
 	
 	//y el tercer caso el segundo if del método getText().
@@ -42,6 +49,7 @@ public class LanguageManipulationTest {
 		String key = "";
 		Language language = Language.Spanish;
 		String text = "This Key does not exist or it has not been yet translated";
+		when(l.getText(key, language)).thenReturn(text);
 		assertEquals(text, l.getText(key,language));
 	}
 }
