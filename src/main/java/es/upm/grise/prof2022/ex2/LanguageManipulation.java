@@ -29,11 +29,12 @@ public class LanguageManipulation {
 		// Find the requested string
 		String text = propertyFile.getProperty(key);
 
-
+		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 
 			throw new NonExistingKeyException();
 		}
 
+		// Non-existing key: case 2
 		if(text == null && language != Language.English) { 
 			text = "This Key does not exist or it has not been yet translated";
 		}
