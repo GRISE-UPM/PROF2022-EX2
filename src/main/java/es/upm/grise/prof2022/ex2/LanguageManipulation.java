@@ -12,22 +12,10 @@ public class LanguageManipulation {
 	// translate("greeting", Spanish) == "¿Cómo se encuentra?"
 	//
 	// See the smokeTest
-	public String getText(String key, Language language) throws Exception {
-
-		// Property filename
-		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
-
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
+	public String getText(String key, Language language, LanguageFile languageFile) throws Exception {
 
 		// Find the requested string
-		String text = propertyFile.getProperty(key);
+		String text = languageFile.getPropertyFile().getProperty(key);
 
 		// Non-existing key: case 1
 		if(text == null && language == Language.English) { 

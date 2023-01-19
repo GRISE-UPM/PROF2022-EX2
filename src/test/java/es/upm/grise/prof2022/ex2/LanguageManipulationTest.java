@@ -11,21 +11,21 @@ public class LanguageManipulationTest {
 	@Test
 	public void unavailableLanguageFileTest(){
 		LanguageManipulation lm = new LanguageManipulation();
-		assertThrows(CannotFindPropertyFileOrWrongFileException.class,() -> lm.getText("greeting", Language.Italian));
+		assertThrows(CannotFindPropertyFileOrWrongFileException.class,() -> lm.getText("greeting", Language.Italian, new LanguageFile(Language.Italian)));
 	}
 	
 	// camino basico 2: 15-23-33a-33b-34
 	@Test
 	public void emptyWordInEnglishTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertThrows(NonExistingKeyException.class,() -> lm.getText("", Language.English));
+		assertThrows(NonExistingKeyException.class,() -> lm.getText("", Language.English, new LanguageFile(Language.English)));
 	}
 	
 	// camino basico 3: 15-23-33a-33b-38a-38b-39-42
 	@Test
 	public void emptyWordNotInEnglishTest() throws Exception {
 		LanguageManipulation lm = new LanguageManipulation();
-		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("", Language.Spanish));
+		assertEquals("This Key does not exist or it has not been yet translated", lm.getText("", Language.Spanish, new LanguageFile(Language.Spanish)));
 	}
 
 }
