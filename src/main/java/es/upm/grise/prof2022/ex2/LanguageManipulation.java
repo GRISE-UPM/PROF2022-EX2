@@ -26,7 +26,7 @@ public class LanguageManipulation {
 			throw new CannotFindPropertyFileOrWrongFileException();
 		}
 		
-		// Load the key
+		// Find the requested string
 		String text = propertyFileIndirection.getRequestedKey(key);
 
 		// Non-existing key: case 1
