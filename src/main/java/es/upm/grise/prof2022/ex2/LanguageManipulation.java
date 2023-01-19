@@ -14,30 +14,8 @@ public class LanguageManipulation {
 	// See the smokeTest
 	public String getText(String key, Language language) throws Exception {
 
-		// Property filename
-		String fileName = language.toString() + "-strings.properties";
-		Properties propertyFile = new Properties();
-
-		// Load the property fileException
-		// If the file does not exist, we raise an exception
-		try {
-			propertyFile.load(new FileInputStream("resources/" + fileName));
-		} catch (Exception e) {
-			throw new CannotFindPropertyFileOrWrongFileException();
-		}
-
-		// Find the requested string
-		String text = propertyFile.getProperty(key);
-
-		// Non-existing key: case 1
-		if(text == null && language == Language.English) { 
-			throw new NonExistingKeyException();
-		}
-
-		// Non-existing key: case 2
-		if(text == null && language != Language.English) { 
-			text = "This Key does not exist or it has not been yet translated";
-		}
+		LanguageManipulationCollab lmc = new LanguageManipulationCollab(language,key);
+		text = lmc.getText();
 
 		return text;
 	}
