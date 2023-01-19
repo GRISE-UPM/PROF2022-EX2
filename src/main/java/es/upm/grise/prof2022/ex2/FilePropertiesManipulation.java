@@ -10,9 +10,9 @@ public class FilePropertiesManipulation {
 		
 	}
 	
-	public String getTextFromProperty(String language, String key) throws CannotFindPropertyFileOrWrongFileException {
+	public String getTextFromProperty(String key, String language) throws CannotFindPropertyFileOrWrongFileException {
 		// Property filename
-		String fileName = language.toString() + "-strings.properties";
+		String fileName = language + "-strings.properties";
 		Properties propertyFile = new Properties();
 
 		// Load the property fileException
