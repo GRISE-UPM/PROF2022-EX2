@@ -14,8 +14,8 @@ public class LanguageManipulation {
 	// See the smokeTest
 	public String getText(String key, Language language) throws Exception {
 
-		LanguageManipulationCollab lmc = new LanguageManipulationCollab(language,key);
-		text = lmc.getText();
+		LanguageManipulationCollab lmc = new LanguageManipulationCollab();
+		text = lmc.getText(key,language);
 
 		return text;
 	}
